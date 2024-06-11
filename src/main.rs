@@ -33,35 +33,91 @@ fn Blog(id: i32) -> Element {
 
 #[component]
 fn Home() -> Element {
-    let mut count = use_signal(|| 0);
-    let mut text = use_signal(|| String::from("..."));
-
     rsx! {
-        Link {
-            to: Route::Blog {
-                id: count()
-            },
-            "Go to blog"
-        }
         div {
-            h1 { "High-Five counter: {count}" }
-            button { onclick: move |_| count += 1, "Up high!" }
-            button { onclick: move |_| count -= 1, "Down low!" }
-            button {
-                onclick: move |_| async move {
-                    if let Ok(data) = get_server_data().await {
-                        tracing::info!("Client received: {}", data);
-                        text.set(data.clone());
-                        post_server_data(data).await.unwrap();
-                    }
-                },
-                "Get Server Data"
+            class: "bg-black text-white grid lg:grid-cols-2 px-12",
+            Intro{}
+            div{
+                About{}
+                Experience{}
+                Projects{}
+                Writing{}
             }
-            p { "Server data: {text}"}
         }
     }
 }
 
+#[component]
+fn Intro() -> Element {
+    rsx! {
+        div {
+            h1{"Thej Zain"}
+            h2{"CSE Student"}
+            h3{"lines"}
+            div{"social"}
+        }
+    }
+}
+
+#[component]
+fn About() -> Element {
+    rsx! {
+        h2{"ABOUT"}
+        h3{"About lines 3 para"}
+    }
+}
+
+#[component]
+fn Experience() -> Element {
+    rsx! {
+        h2{"EXPERIENCE"}
+        div{
+            class : "grid grid-cols-3",
+            div{"2024-PRESENT"}
+            div{
+                class:"col-span-2",
+                div{
+                    class:"grid grid-rows-3",
+                    div{"Name"}
+                    div{"details"}
+                    div{"tech"}
+                }
+            }
+        }
+        div{"View Full Resume"}
+    }
+}
+
+#[component]
+fn Projects() -> Element {
+    rsx! {
+        h2{"PROJECTS"}
+        div{
+            class : "grid grid-cols-3",
+            div{"pic"}
+            div{
+                class:"col-span-2",
+                div{
+                    div{"Name"}
+                    div{"desc"}
+                }
+            }
+        }
+        div{"View Full Project Archive"}
+    }
+}
+
+#[component]
+fn Writing() -> Element {
+    rsx! {
+        h2{"WRITING"}
+        div{
+            class : "grid grid-cols-3",
+            div{"pic"}
+            div{class:"col-span-2", div{ div{"Date"} div{"Name"}}}
+        }
+    }
+}
 #[server(PostServerData)]
 async fn post_server_data(data: String) -> Result<(), ServerFnError> {
     info!("Server received: {}", data);
