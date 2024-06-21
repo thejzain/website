@@ -35,7 +35,7 @@ fn Blog(id: i32) -> Element {
 fn Home() -> Element {
     rsx! {
         div {
-            class: "bg-black text-white grid lg:grid-cols-2 px-12",
+            class: "pt-20 bg-black text-white grid lg:grid-cols-2 px-14 lg:px-64",
             Intro{}
             div{
                 About{}
@@ -52,8 +52,8 @@ fn Intro() -> Element {
     rsx! {
         div {
             h1{"Thej Zain"}
-            h2{"CSE Student"}
-            h3{"lines"}
+            h2{class:"text-xl","CSE Student"}
+            h3{"I build things"}
             div{"social"}
         }
     }
@@ -62,8 +62,11 @@ fn Intro() -> Element {
 #[component]
 fn About() -> Element {
     rsx! {
-        h2{"ABOUT"}
-        h3{"About lines 3 para"}
+        h2{class: "","ABOUT"}
+        p{"My journey into the world of technology began with a profound passion for Rust and its application in OS development. Although I've delved into building tiny operating systems, my true enthusiasm lies in utilizing Rust's power to solve complex problems and build efficient, high-performance software."}
+        p{"As a Rust enthusiast, I enjoy exploring how this language can revolutionize everything from system-level programming to web applications. My work often involves integrating Rust’s safety and concurrency features to create robust and scalable solutions."}
+        p{"I thrive on the challenge of finding innovative ways to merge Rust’s strengths with other technologies to tackle diverse technical problems. Whether optimizing backend architectures or crafting sleek interfaces, I aim to deliver solutions that are both elegant and effective. When I'm not deep into coding, you can find me exploring cybersecurity or keeping up with the latest tech advancements."}
+
     }
 }
 
